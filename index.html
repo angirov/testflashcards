@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Flashcards</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --bg: #f0f2f5;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /* Flashcard Wrapper */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+
+        /* The Flip Effect */
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 15px;
+            background: white;
+            border: 2px solid var(--primary);
+        }
+
+        .card-back {
+            background: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* Controls */
+        .controls button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: opacity 0.2s;
+        }
+
+        .controls button:hover {
+            opacity: 0.8;
+        }
+
+        .counter {
+            margin-top: 15px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Vocabulary Trainer</h1>
+    
+    <div class="flashcard-container" onclick="flipCard()">
+        <div class="flashcard" id="card">
+            <div class="card-face card-front" id="frontText">Apple</div>
+            <div class="card-face card-back" id="backText">Apfel</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevCard()">Previous</button>
+        <button onclick="nextCard()">Next</button>
+    </div>
+
+    <div class="counter" id="counter">1 / 5</div>
+</div>
+
+<script>
+    const words = [
+        { front: "Apple", back: "Apfel" },
+        { front: "Cake", back: "Kuchen" },
+        { front: "Bread", back: "Brot" },
+        { front: "Water", back: "Wasser" },
+        { front: "Milk", back: "Milch" }
+    ];
+
+    let currentIndex = 0;
+    const card = document.getElementById('card');
+    const frontText = document.getElementById('frontText');
+    const backText = document.getElementById('backText');
+    const counter = document.getElementById('counter');
+
+    function updateCard() {
+        // Reset flip before changing text
+        card.classList.remove('flipped');
+        
+        // Short delay to allow the card to "unflip" before changing text
+        setTimeout(() => {
+            frontText.innerText = words[currentIndex].front;
+            backText.innerText = words[currentIndex].back;
+            counter.innerText = `${currentIndex + 1} / ${words.length}`;
+        }, 150);
+    }
+
+    function flipCard() {
+        card.classList.toggle('flipped');
+    }
+
+    function nextCard() {
+        currentIndex = (currentIndex + 1) % words.length;
+        updateCard();
+    }
+
+    function prevCard() {
+        currentIndex = (currentIndex - 1 + words.length) % words.length;
+        updateCard();
+    }
+</script>
+
+</body>
+</html>
