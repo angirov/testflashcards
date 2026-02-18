@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Translator</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --bg: #f0f2f5;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Landscape Rectangle Container */
+        .story-card {
+            background: var(--card-bg);
+            width: 80%;
+            max-width: 800px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .story-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #444;
+        }
+
+        /* Tooltip Styling */
+        .word {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            border-bottom: 2px dashed var(--primary);
+            color: var(--text);
+            transition: color 0.2s;
+        }
+
+        .word:hover {
+            color: var(--primary);
+        }
+
+        /* Tooltip Hidden by Default */
+        .word .tooltip {
+            visibility: hidden;
+            width: 120px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the word */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+
+        /* Tooltip Arrow */
+        .word .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        /* Show Tooltip on Hover */
+        .word:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .hint {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="story-card">
+    <h1>A Morning Surprise</h1>
+    
+    <div class="story-text">
+        Every <span class="word">morning<span class="tooltip">утро</span></span>, 
+        a <span class="word">small<span class="tooltip">маленькая</span></span> 
+        <span class="word">bird<span class="tooltip">птица</span></span> 
+        sings <span class="word">near<span class="tooltip">возле</span></span> my window. 
+        It has <span class="word">bright<span class="tooltip">яркие</span></span> 
+        blue <span class="word">feathers<span class="tooltip">перья</span></span> and a very 
+        <span class="word">sweet<span class="tooltip">сладкий/нежный</span></span> voice. 
+        One day, I <span class="word">placed<span class="tooltip">положил</span></span> some 
+        <span class="word">seeds<span class="tooltip">семена</span></span> on the 
+        <span class="word">outside<span class="tooltip">снаружи</span></span> ledge. 
+        The bird <span class="word">seemed<span class="tooltip">казалась</span></span> very 
+        <span class="word">happy<span class="tooltip">счастливой</span></span> and ate them all. 
+        Now, we are <span class="word">friends<span class="tooltip">друзья</span></span> and start the 
+        <span class="word">day<span class="tooltip">день</span></span> together.
+    </div>
+
+    <div class="hint">Hover over the underlined words to see the translation</div>
+</div>
+
+</body>
+</html>
